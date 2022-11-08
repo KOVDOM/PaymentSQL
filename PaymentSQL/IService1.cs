@@ -21,10 +21,10 @@ namespace PaymentSQL
         List<Customer> GetCustomers();
 
         [OperationContract]
-        [WebInvoke(Method = "POST",
+        [WebInvoke(Method = "*",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.WrappedResponse,
+            BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "putCustomer")]
 
         string putCustomer(Customer cust);
