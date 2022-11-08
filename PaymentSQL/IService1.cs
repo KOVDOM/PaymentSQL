@@ -20,14 +20,14 @@ namespace PaymentSQL
 
         List<Customer> GetCustomers();
 
-        //[OperationContract]
-        //[WebInvoke(Method = "PUT",
-        //    RequestFormat = WebMessageFormat.Json,
-        //    ResponseFormat = WebMessageFormat.Json,
-        //    BodyStyle = WebMessageBodyStyle.Wrapped,
-        //    UriTemplate = "putCustomer")]
+        [OperationContract]
+        [WebInvoke(Method = "PUT",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "putCustomer")]
 
-        //string putCustomer(Customer customer);
+        string putCustomer(Customer customer);
 
 
         [OperationContract]

@@ -51,18 +51,18 @@ namespace PaymentSQL
             return "A felhasználó hozzáadva!";
         }
 
-        //public string putCustomer(Customer customer)
-        //{
-        //    string query = "INSERT INTO customer(name,city,age) VALUES (@name,@city,@age)";
-        //    MySqlCommand cmd = new MySqlCommand();
-        //    cmd.Parameters.AddWithValue("@name", customer.Name);
-        //    cmd.Parameters.AddWithValue("@city", customer.City);
-        //    cmd.Parameters.AddWithValue("@age", customer.Age);
-        //    cmd.Connection=c.connect;
-        //    cmd.CommandText = query;
-        //    cmd.ExecuteReader();
+        public string putCustomer(Customer cust)
+        {
+            string query = "INSERT INTO customer(name,city,age) VALUES (@name,@city,@age)";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Parameters.AddWithValue("@name", cust.Name);
+            cmd.Parameters.AddWithValue("@city", cust.City);
+            cmd.Parameters.AddWithValue("@age", cust.Age);
+            cmd.Connection = c.connect;
+            cmd.CommandText = query;
+            cmd.ExecuteReader();
 
-        //    return "A felhasználó hozzáadva!";
-        //}
+            return "A felhasználó hozzáadva!";
+        }
     }
 }
