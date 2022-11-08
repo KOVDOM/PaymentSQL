@@ -12,23 +12,22 @@ namespace PaymentSQL
     public interface IService1
     {
         [OperationContract]
-        [WebInvoke(Method = "GET",
+        [WebInvoke(Method = "*",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Wrapped,
+            BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "getCustomers")]
 
         List<Customer> GetCustomers();
 
         [OperationContract]
-        [WebInvoke(Method = "PUT",
+        [WebInvoke(Method = "POST",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Wrapped,
+            BodyStyle = WebMessageBodyStyle.WrappedResponse,
             UriTemplate = "putCustomer")]
 
-        string putCustomer(Customer customer);
-
+        string putCustomer(Customer cust);
 
         [OperationContract]
         [WebInvoke(Method = "POST",
@@ -38,5 +37,23 @@ namespace PaymentSQL
             UriTemplate = "postCustomer/{name}/{city}/{age}")]
 
         string postCustomer(string name, string city, string age);
+
+        [OperationContract]
+        [WebInvoke(Method = "DELETE",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedResponse,
+            UriTemplate = "deletecustomer/{id}")]
+
+        string deletecustomer(string id);
+
+        [OperationContract]
+        [WebInvoke(Method = "PUT",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.WrappedResponse,
+            UriTemplate = "updateCustomer")]
+
+        string updateCustomer(Customer cust);
     }
 }

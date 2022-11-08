@@ -64,5 +64,33 @@ namespace PaymentSQL
 
             return "A felhasználó hozzáadva!";
         }
+
+        public string deletecustomer(string id)
+        {
+
+            string query = "DELETE FROM `customer` WHERE `id`=@id;";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c.connect;
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.CommandText = query;
+            cmd.ExecuteNonQuery();
+
+            return "A felhasználó törölve!";
+        }
+
+        public string updateCustomer(Customer cust)
+        {
+            string query = "UPDATE `customer` SET `name`=@name,`city`=@city,`age`=@age WHERE id=@id";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = c.connect;
+            cmd.Parameters.AddWithValue("@id", cust.Id);
+            cmd.Parameters.AddWithValue("@name", cust.Name);
+            cmd.Parameters.AddWithValue("@city", cust.City);
+            cmd.Parameters.AddWithValue("@age", cust.Age);
+            cmd.CommandText = query;
+            cmd.ExecuteNonQuery();
+
+            return "A felhasználó modosítva!";
+        }
     }
 }
