@@ -53,16 +53,23 @@ namespace PaymentSQL
 
         public string putCustomer(Customer cust)
         {
-            string query = "INSERT INTO customer(name,city,age) VALUES (@name,@city,@age)";
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Parameters.AddWithValue("@name", cust.Name);
-            cmd.Parameters.AddWithValue("@city", cust.City);
-            cmd.Parameters.AddWithValue("@age", cust.Age);
-            cmd.Connection = c.connect;
-            cmd.CommandText = query;
-            cmd.ExecuteReader();
+            try
+            {
+                string query = "INSERT INTO customer(name,city,age) VALUES (@name,@city,@age)";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Parameters.AddWithValue("@name", cust.Name);
+                cmd.Parameters.AddWithValue("@city", cust.City);
+                cmd.Parameters.AddWithValue("@age", cust.Age);
+                cmd.Connection = c.connect;
+                cmd.CommandText = query;
+                cmd.ExecuteReader();
 
-            return "A felhasználó hozzáadva!";
+                return "A felhasználó hozzáadva!";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
         public string deletecustomer(string id)
@@ -80,17 +87,24 @@ namespace PaymentSQL
 
         public string updateCustomer(Customer cust)
         {
-            string query = "UPDATE `customer` SET `name`=@name,`city`=@city,`age`=@age WHERE id=@id";
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = c.connect;
-            cmd.Parameters.AddWithValue("@id", cust.Id);
-            cmd.Parameters.AddWithValue("@name", cust.Name);
-            cmd.Parameters.AddWithValue("@city", cust.City);
-            cmd.Parameters.AddWithValue("@age", cust.Age);
-            cmd.CommandText = query;
-            cmd.ExecuteNonQuery();
+            try
+            {
+                string query = "UPDATE `customer` SET `name`=@name,`city`=@city,`age`=@age WHERE id=@id";
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = c.connect;
+                cmd.Parameters.AddWithValue("@id", cust.Id);
+                cmd.Parameters.AddWithValue("@name", cust.Name);
+                cmd.Parameters.AddWithValue("@city", cust.City);
+                cmd.Parameters.AddWithValue("@age", cust.Age);
+                cmd.CommandText = query;
+                cmd.ExecuteNonQuery();
 
-            return "A felhasználó modosítva!";
+                return "A felhasználó modosítva!";  
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
     }
 }

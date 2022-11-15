@@ -1,21 +1,52 @@
+var state=false;
+document.getElementById("change").onclick=function(){
+    switch(state){
+        case true:{
+            state=!state;
+            document.getElementById('id').innerHTML="";
+            break;
+        }
+        case false:{
+            state=!state;
+            let contentText=`
+            ID: <input type='number' min='1' value='1' id='idInput' required></input><br>
+            `;
+            document.getElementById('id').innerHTML=contentText;        
+            break;
+        }
+    }
+}
+
 document.getElementById('form1').onsubmit=function (event){
     event.preventDefault();
     var nev=event.target.elements.name.value;
     var varos=event.target.elements.city.value;
     var kor=event.target.elements.age.value;
 
-    var objBody=JSON.stringify({
-        Name: nev,
-        City: varos,
-        Age: kor
-    });
+    if(state==true){
+        var id=event.target.elements.idInput.value;
+        var objBody=JSON.stringify({
+            Id: id,
+            Name: nev,
+            City: varos,
+            Age: kor
+        });
 
-    addCustList(objBody);
+        modifyCustList(objBody);
+    }else{
+        var objBody=JSON.stringify({
+            Name: nev,
+            City: varos,
+            Age: kor
+        });
+
+        addCustList(objBody);
+    }
 }
 
 async function addCustList(objBody){
     var url="http://localhost:52530/Service1.svc/putCustomer";
-    var outCust=await fetch(url,{
+    var putCust=await fetch(url,{
         method:"POST",
         body:objBody,
         headers:{
@@ -26,8 +57,10 @@ async function addCustList(objBody){
         alert("POST végpont hiba!");
         return;
     }
-    var putResult=putCast.json();
+    var putResult=await putCust.json();
+    alert(putResult);
     console.log(putResult);
+    viewCustList();
 }
 
 async function viewCustList(){
@@ -43,6 +76,44 @@ async function viewCustList(){
     renderCustomer(custList);
 }
 viewCustList();
+
+async function modifyCustList(objBody){
+    var url="http://localhost:52530/Service1.svc/updateCustomer";
+    var upCust=await fetch(url,{
+        method:"POST",
+        body:objBody,
+        headers:{
+            'content-type':"application/json"
+        }
+    });
+    if(!upCust.ok){
+        alert("Modosítási hiba!");
+        return;
+    }
+    var upResult=await upCust.json();
+    alert(upResult);
+    console.log(upResult);
+    viewCustList();
+}
+
+async function delCustlist(azon){
+    var url=`http://localhost:52530/Service1.svc/deletecustomer/${azon}`;
+    var delCust=await fetch(url,{
+        method:"DELETE",
+        body:objBody,
+        headers:{
+            'content-type':"application/json"
+        }
+    });
+    if(!delCust.ok){
+        alert("Törlési hiba!");
+        return;
+    }
+    var delResult=await delCust.json();
+    alert(delResult);
+    console.log(delResult);
+    viewCustList();
+}
 
 function renderCustomer(custList){
     var contentText='';

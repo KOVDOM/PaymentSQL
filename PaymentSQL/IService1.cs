@@ -39,7 +39,7 @@ namespace PaymentSQL
         string postCustomer(string name, string city, string age);
 
         [OperationContract]
-        [WebInvoke(Method = "DELETE",
+        [WebInvoke(Method = "*",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.WrappedResponse,
@@ -48,10 +48,10 @@ namespace PaymentSQL
         string deletecustomer(string id);
 
         [OperationContract]
-        [WebInvoke(Method = "PUT",
+        [WebInvoke(Method = "*",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.WrappedResponse,
+            BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "updateCustomer")]
 
         string updateCustomer(Customer cust);
