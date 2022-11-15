@@ -42,7 +42,7 @@ namespace PaymentSQL
         [WebInvoke(Method = "*",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.WrappedResponse,
+            BodyStyle = WebMessageBodyStyle.Bare,
             UriTemplate = "deletecustomer/{id}")]
 
         string deletecustomer(string id);
