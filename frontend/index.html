@@ -12,7 +12,7 @@
 
         table {
           border: 1px solid black;
-          margin-top: 100px;
+          margin-top: 10px;
           margin-right: 150px;
           margin-left: 80px;
           background-color: lightblue;
@@ -47,7 +47,7 @@
             <button type="submit" class="btn btn-primary">Elküld</button>
         </form>
         <form class="form2">
-            Id: <input type="number" id="idDel"><br>
+            Id: <input type="number" min="1" value="1" id="idDel" required><br>
             <button type="button" id="delete" class="btn btn-danger">Töröl</button>
         </form>
     </div>

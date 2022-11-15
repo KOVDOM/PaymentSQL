@@ -96,11 +96,14 @@ async function modifyCustList(objBody){
     viewCustList();
 }
 
+document.getElementById('delete').onclick=function(){
+    var azon=document.getElementById('idDel').value;
+    delCustlist(azon);
+}
 async function delCustlist(azon){
     var url=`http://localhost:52530/Service1.svc/deletecustomer/${azon}`;
     var delCust=await fetch(url,{
         method:"DELETE",
-        body:objBody,
         headers:{
             'content-type':"application/json"
         }
